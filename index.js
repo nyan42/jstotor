@@ -99,7 +99,7 @@ function createNewRow(tbody, task) {
         btn.setAttribute("id", 'terminate');
         btn.onclick = function () {
             var idToUpdate = task[1];
-            alert("update");
+            alert("update" + idToUpdate);
             updateAPI(idToUpdate);
         }
         btn.innerHTML = "Terminer";
@@ -273,43 +273,19 @@ function updateAPI(idToUpdate) {
     //`https://jsonplaceholder.typicode.com/todos/${idToUpdate}`
 
     var raw = JSON.stringify({ "completed": true });
-    /*var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({ "completed": true });
 
     var requestOptions = {
         method: 'PATCH',//un probleme avec le put m'empeche de fetch, donc j'utilise patch
-        headers: myHeaders,
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+        },
+        mode:"cors",
         body: raw,
-        mode: "cors",
-        redirect: 'follow'
     };
 
     fetch("https://jsonplaceholder.typicode.com/todos/1", requestOptions)
-        .then(response => response.text())
+        .then(response => response.json())
         .then(result => console.log(result))
-        .catch(error => alert(error));*/
+        .catch(error => alert(error));
 
-    fetch("https://jsonplaceholder.typicode.com/todos/1", {
-        _method: 'PATCH',
-        crossDomain: true,
-        xhrFields: {
-            withCredentials: true
-        },
-        mode: "cors",
-        redirect: 'follow',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': ''
-        },
-        data: JSON.stringify({ "completed": true }),
-        credentials: 'include'
-    })
-        .then(res => console.log(res.json()))
-        .then(res => {
-            console.log(res);
-        })
-        .catch(err => alert(err))
 }
