@@ -1,9 +1,9 @@
 function AddInLocalStorage() {
     //stockage du json en localstorage pour plus facilement get / modifier / supprimer les valeurs en temps réel
-    var myHeaders = new Headers();
+    let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-    var requestOptions = {
+    let requestOptions = {
         method: 'GET',
         headers: myHeaders,
     };
@@ -15,7 +15,7 @@ function AddInLocalStorage() {
         })
         .then(tasks => {
             localStorage.setItem('myData', JSON.stringify(tasks));
-            var DataInJSON = (localStorage.getItem('myData'));
+            let DataInJSON = (localStorage.getItem('myData'));
             DataInJSON = JSON.parse(DataInJSON);
 
             //      console.log(DataInJSON.length);
@@ -30,30 +30,30 @@ function AddInLocalStorage() {
 
 function getTasks() {
     //permet d'initialiser le tableau à l'aide des variables locals 
-    var alreadyThere = document.getElementById("allTable");
+    let alreadyThere = document.getElementById("allTable");
     //permet de ne pas générer plusieurs fois le get
     if (alreadyThere == null) {
-        var arrayKey = ["User", "Id", "Titre", "Terminé", "Action"]
+        let arrayKey = ["User", "Id", "Titre", "Terminé", "Action"]
 
-        var myDiv = document.getElementById("divtable")
-        var table = document.createElement("table");
+        let myDiv = document.getElementById("divtable")
+        let table = document.createElement("table");
         table.setAttribute("id", 'allTable');
         table.setAttribute("class", 'table');
         myDiv.appendChild(table);
         let thead = table.createTHead();
-        var newTr = document.createElement("tr");
+        let newTr = document.createElement("tr");
         thead.appendChild(newTr);
 
         for (let index = 0; index < arrayKey.length; index++) { //permet d'afficher le haut du tableau
-            var newTh = document.createElement("th");
+            let newTh = document.createElement("th");
             newTr.appendChild(newTh);
             newTh.innerHTML += arrayKey[index];
         }
-        var tbody = table.appendChild(document.createElement('tbody'));
+        let tbody = table.appendChild(document.createElement('tbody'));
         tbody.setAttribute("id", 'tbody_getTask');
 
         //utilisation des local storage utilisés au début
-        var DataInJSON = (localStorage.getItem('myData'));
+        let DataInJSON = (localStorage.getItem('myData'));
         DataInJSON = JSON.parse(DataInJSON);
 
         console.log(DataInJSON.length);
@@ -74,32 +74,30 @@ function reloadTasks() {
 }
 
 function createNewRow(tbody, task) {
-    var newTr = document.createElement("tr");
+    let newTr = document.createElement("tr");
     tbody.appendChild(newTr);
     for (let index = 0; index < task.length; index++) {
         createCell(newTr, task[index]);
     }
-    var newTd = document.createElement("td");
+    let newTd = document.createElement("td");
     newTr.appendChild(newTd);
     newTd.setAttribute("class", 'boldFont');
 
-    var btn = document.createElement("button");
+    let btn = document.createElement("button");
     btn.setAttribute("class", 'btn btn-dark');
 
     if (task[3] == true) {
         btn.setAttribute("id", 'delete');
         btn.onclick = function () {
-            var idToDelete = task[1];
+            let idToDelete = task[1];
             alert("suppression de l'id : " + idToDelete);
             deleteAPI(idToDelete);
         }
         btn.innerHTML = "Supprimer";
-        newTd.appendChild(btn);
     } else {
         btn.setAttribute("id", 'terminate');
         btn.onclick = function () {
-            var idToUpdate = task[1];
-            alert("update" + idToUpdate);
+            let idToUpdate = task[1];
             updateAPI(idToUpdate);
         }
         btn.innerHTML = "Terminer";
@@ -109,7 +107,7 @@ function createNewRow(tbody, task) {
 }
 
 function createCell(newTr, mytask) {
-    var newTd = document.createElement("td");
+    let newTd = document.createElement("td");
     newTr.appendChild(newTd);
     newTd.setAttribute("id", 'boldFont');
     switch (mytask) {
@@ -131,10 +129,10 @@ function createCell(newTr, mytask) {
 }
 
 function countTasks() {
-    var DataInJSON = (localStorage.getItem('myData'));
+    let DataInJSON = (localStorage.getItem('myData'));
     DataInJSON = JSON.parse(DataInJSON);
 
-    var myDiv = document.createElement("div");
+    let myDiv = document.createElement("div");
     myDiv.setAttribute("id", 'nb_task');
     document.body.appendChild(myDiv);
     myDiv.innerHTML += `Nombre de tâches : ${DataInJSON.length}`;
@@ -143,16 +141,16 @@ function countTasks() {
 }
 
 function postAPI() {
-    var titrePost = document.getElementById("inputTitre").value;
+    let titrePost = document.getElementById("inputTitre").value;
     if (titrePost == null || titrePost == undefined || titrePost == "") {
         alert('veuillez renseigner un titre');
     } else {
 
 
-        var myHeaders = new Headers();
+        let myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
-        var requestOptions = {
+        let requestOptions = {
             method: 'POST',
             headers: myHeaders,
             body: JSON.stringify({
@@ -197,10 +195,10 @@ function postAPI() {
 
                 console.log("ajoute de :" + result);
 
-                var DataInJSON = (localStorage.getItem('myData'));
+                let DataInJSON = (localStorage.getItem('myData'));
                 DataInJSON = JSON.parse(DataInJSON);
 
-                var a = [];
+                let a = [];
                 // Parse the serialized data back into an array of objects
                 a = JSON.parse(localStorage.getItem('myData')) || [];
                 // Push the new data (whether it be an object or anything else) onto the array
@@ -212,7 +210,7 @@ function postAPI() {
                 DataInJSON = (localStorage.getItem('myData'));
                 DataInJSON = JSON.parse(DataInJSON);
 
-                reloadTasks();
+                //reloadTasks();
             })
             .catch(error => {
                 console.log(error);
@@ -222,9 +220,9 @@ function postAPI() {
 
 function deleteAPI(idToDelete) {
 
-    var myHeaders = new Headers();
+    let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    var requestOptions = {
+    let requestOptions = {
         method: 'DELETE',
         headers: myHeaders,
         mode: "cors",
@@ -234,10 +232,7 @@ function deleteAPI(idToDelete) {
     urlDelete = 'https://jsonplaceholder.typicode.com/todos/' + idToDelete;
 
     fetch(urlDelete, requestOptions)
-        .then(result => {
-            if (!result.ok) throw result;
-            return result.json();
-        })
+        .then(result => result.json())
         .then(tasks => {
             //J'aurais bien aimer récupérer les valeurs de l'api cependant elle ne retourne rien 
             //pas retour donc on ne passe même pas dans le then
@@ -248,7 +243,7 @@ function deleteAPI(idToDelete) {
 
     console.log("Suppresion de l'id :" + idToDelete);
 
-    var DataInJSON = (localStorage.getItem('myData'));
+    let DataInJSON = (localStorage.getItem('myData'));
     DataInJSON = JSON.parse(DataInJSON);
     DataInJSON.forEach(element => {
 
@@ -264,28 +259,38 @@ function deleteAPI(idToDelete) {
     });
 }
 
-
-
 function updateAPI(idToUpdate) {
 
-    /*var DataInJSON = (localStorage.getItem('myData'));
+    /*let DataInJSON = (localStorage.getItem('myData'));
     DataInJSON = JSON.parse(DataInJSON);*/
     //`https://jsonplaceholder.typicode.com/todos/${idToUpdate}`
 
-    var raw = JSON.stringify({ "completed": true });
+    let raw = JSON.stringify({ "completed": true });
 
-    var requestOptions = {
+    let requestOptions = {
         method: 'PATCH',//un probleme avec le put m'empeche de fetch, donc j'utilise patch
         headers: {
             'Content-type': 'application/json; charset=UTF-8'
         },
-        mode:"cors",
-        body: raw,
+        body: raw
     };
 
-    fetch("https://jsonplaceholder.typicode.com/todos/1", requestOptions)
+    fetch(`https://jsonplaceholder.typicode.com/todos/${idToUpdate}`, requestOptions)
         .then(response => response.json())
-        .then(result => console.log(result))
+        .then(result => {
+            let DataInJSON = (localStorage.getItem('myData'));
+            DataInJSON = JSON.parse(DataInJSON);
+            DataInJSON.forEach(element => {
+                if (element.id > -1 &&
+                    element.id === parseInt(idToUpdate)
+                ) {
+                    element.completed = true;
+                    localStorage.setItem('myData', JSON.stringify(DataInJSON));
+                    reloadTasks();
+                }
+
+            });
+        })
         .catch(error => alert(error));
 
 }

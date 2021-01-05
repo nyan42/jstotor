@@ -12,16 +12,17 @@
 		<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
-<body onload="AddInLocalStorage()">
+<body>
 	<a href="index.html#ToUp"><button id="ToDown"> Go to bottom </button></a>
+	
 	<form method="get" action="index.html">
 		<button type="button" class="btn btn-dark" value="Envoyer" onclick="getTasks();">Charger la liste</button>
-		<div id="divtable"></div>
 	</form>
 
-
+	<div id="divtable"></div>
 
 	<p id="result"> </p>
+
 
 	<form>
 
@@ -29,7 +30,6 @@
 		<div class="">
 			<input type="text" class="" id="inputTitre">
 		</div>
-
 		<div class="">
 			<div class="">
 				<button type="button" class="btn btn-dark" onclick="postAPI();">Valider</button>
@@ -39,7 +39,9 @@
 
 	<a href="index.html#ToDown"><button id="ToUp"> Go to top </button></a>
 </body>
-
-
+<script>
+	AddInLocalStorage();
+	getTasks();
+</script>
 
 </html>
