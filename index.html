@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title> Tp-Tableaujs Victor Legros </title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<label style="font-size:20px; font-family:calibri;">
+		<script type="text/javascript" src="index.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body onload="AddInLocalStorage()">
+	<a href="index.html#ToUp"><button id="ToDown"> Go to bottom </button></a>
+	<form method="get" action="index.html">
+		<button type="button" class="btn btn-dark" value="Envoyer" onclick="getTasks();">Charger la liste</button>
+		<div id="divtable"></div>
+	</form>
+
+
+
+	<p id="result"> </p>
+
+	<form>
+
+		<label for="inputTitre" class="">Titre</label>
+		<div class="">
+			<input type="text" class="" id="inputTitre">
+		</div>
+
+		<div class="">
+			<div class="">
+				<button type="button" class="btn btn-dark" onclick="postAPI();">Valider</button>
+			</div>
+		</div>
+	</form>
+
+	<a href="index.html#ToDown"><button id="ToUp"> Go to top </button></a>
+</body>
+
+
+
+</html>

@@ -1,0 +1,40 @@
+body, html {
+	height: 100%;
+  }
+  body {
+	color: white;
+	background-color: rgb(49, 28, 28);
+	text-align: center;
+}
+
+tr {
+	border-radius: 10px;
+}
+
+th {
+	padding: 15px;
+}
+
+.table {
+	color: white;
+}
+
+form {
+	margin-top: 100px !important;
+}
+
+.nb_task {
+	text-align: center;
+}
+
+#boldFont {
+	font-weight: bold;
+}
+
+.green {
+	color: green;
+}
+
+.red {
+	color: red;
+}
