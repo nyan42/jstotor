@@ -90,7 +90,7 @@ function createNewRow(tbody, task) {
         btn.setAttribute("id", 'delete');
         btn.onclick = function () {
             let idToDelete = task[1];
-            alert("suppression de l'id : " + idToDelete);
+        //    alert("suppression de l'id : " + idToDelete);
             deleteAPI(idToDelete);
         }
         btn.innerHTML = "Supprimer";
@@ -143,7 +143,7 @@ function countTasks() {
 function postAPI() {
     let titrePost = document.getElementById("inputTitre").value;
     if (titrePost == null || titrePost == undefined || titrePost == "") {
-        alert('veuillez renseigner un titre');
+    //    alert('veuillez renseigner un titre');
     } else {
 
 
@@ -210,7 +210,7 @@ function postAPI() {
                 DataInJSON = (localStorage.getItem('myData'));
                 DataInJSON = JSON.parse(DataInJSON);
 
-                //reloadTasks();
+                reloadTasks();
             })
             .catch(error => {
                 console.log(error);
